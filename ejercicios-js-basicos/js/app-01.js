@@ -56,17 +56,90 @@ document.write(suma); */
 
 // 8- Escribe un programa que pida un número
 // y diga si es divisible por 2.
-let a = parseFloat(prompt("Escribe un numero:"));
+// let a = parseFloat(prompt("Escribe un numero:"));
 
-("si (a % 2 === 0) -> es par sinó es impar");
-if (a % 2 === 0) {
-  alert("Par");
-} else {
-  alert("Impar");
+// ("si (a % 2 === 0) -> es par sinó es impar");
+// if (a % 2 === 0) {
+//   alert("Par");
+// } else {
+//   alert("Impar");
+// }
+
+// 9- Escribe un programa que pida una frase y
+//escriba cuántas veces aparece la letra "a".
+
+// const frase = prompt("Escribe una frase");
+// // const frase = "hola mundo";
+// let numAes = 0;
+
+// for (let i = 0; i < frase.length; i++) {
+//   const letra = frase[i];
+//   if (letra === "a") {
+//     numAes++;
+//   }
+// }
+// alert(`La frase tiene ${numAes} aes`);
+// 10- Escribe un programa que pida una frase y
+//escriba las vocales que aparecen.
+/* 
+const frase = prompt("Escribe una frase");
+let numVocales = 0;
+
+for (let i = 0; i < frase.length; i++) {
+  const letra = frase[i];
+  //solo sumar si es a, e, i, o,u
+  //if ese
+  if (letra === "a") {
+    numVocales++;
+  } else if (letra === "e") {
+    numVocales++;
+  } else if (letra === "i") {
+    numVocales++;
+  } else if (letra === "o") {
+    numVocales++;
+  } else if (letra === "u") {
+    numVocales++;
+  }
+
+  //Operadores lógicos
+  if (
+    letra === "a" ||
+    letra === "e" ||
+    letra === "i" ||
+    letra === "o" ||
+    letra === "u"
+  ) {
+    numVocales++;
+  }
+  //switch case
+  switch (letra) {
+    case "a":
+    case "e":
+    case "i":
+    case "o":
+    case "u":
+      numVocales++;
+      break;
+  }
 }
+alert(`La frase tiene ${numVocales} vocales`);
+*/
 
-// 9- Escribe un programa que pida una frase y escriba cuántas veces aparece la letra "a".
-// 10- Escribe un programa que pida una frase y escriba las vocales que aparecen.
+// const frase = prompt("Escribe una frase");
+const frase = "ayer fue domingo";
+let numVocales = 0;
+const vocales = "aeiouAEIOU";
+
+for (let i = 0; i < frase.length; i++) {
+  for (let j = 0; j < vocales.length; j++) {
+    if (frase[i] === vocales[j]) {
+      numVocales++;
+      break;
+    }
+  }
+}
+alert(`La frase tiene ${numVocales} vocales`);
+
 // 11- Escribe un programa que pida una frase y escriba cuántas de las letras que tiene son
 // vocales.
 // 12- Escribe un programa que pida una frase y escriba cuántas veces aparece cada una de
