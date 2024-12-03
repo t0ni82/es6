@@ -128,18 +128,25 @@ alert(`La frase tiene ${numVocales} vocales`);
 // const frase = prompt("Escribe una frase");
 const frase = "ayer fue domingo";
 let numVocales = 0;
-const vocales = "aeiouAEIOU";
+// const vocales = "aeiouAEIOU";
 
+// for (let i = 0; i < frase.length; i++) {
+//   for (let j = 0; j < vocales.length; j++) {
+//     if (frase[i] === vocales[j]) {
+//       numVocales++;
+//       break;
+//     }
+//   }
+// }
+// alert(`La frase tiene ${numVocales} vocales`);
+
+const expVocal = /[aeiouAEIOU]/; //Uso de expresiones regulares en JS
 for (let i = 0; i < frase.length; i++) {
-  for (let j = 0; j < vocales.length; j++) {
-    if (frase[i] === vocales[j]) {
-      numVocales++;
-      break;
-    }
+  if (expVocal.test("frase[i]")) {
+    numVocales++;
   }
 }
 alert(`La frase tiene ${numVocales} vocales`);
-
 // 11- Escribe un programa que pida una frase y escriba cuántas de las letras que tiene son
 // vocales.
 // 12- Escribe un programa que pida una frase y escriba cuántas veces aparece cada una de
