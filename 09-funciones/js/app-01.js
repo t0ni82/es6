@@ -36,3 +36,18 @@ console.log(resultado);
 
 //escibe una funcion que pase de euros a dolares
 //1 euro es 1,05 USD
+
+/**
+ * @description funcion que convierte euros a USD
+ * @param {number} cantidad en euros
+ * @returns {number} cantidad en dólares
+ */
+function euroToDolar(cantidad) {
+  const usd = cantidad * 1.05;
+  return usd;
+}
+
+function pedirEuros() {
+  let euros = prompt("Introduce la cantidad de euros");
+  alert(euroToDolar(euros));
+}
