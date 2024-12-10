@@ -9,6 +9,9 @@ const ctx = canvas.getContext("2d");
 const GAME_W = 640;
 const GAME_H = 360;
 
+//Variable que indica si el juego ha acabado
+let isPlaying = true;
+
 //Crear los eventos para detectar el click del ratón
 canvas.addEventListener("mousedown", function () {
   player.isMoving = true;
@@ -33,6 +36,7 @@ const player = {
   speedX: 1,
   isMoving: false,
 };
+//Crear la meta
 
 const enemies = [
   {
@@ -78,9 +82,18 @@ function update() {
   if (player.isMoving) {
     player.x += player.speedX;
   }
+
+  //Miramos si chocamos con la meta si es así has ganado
+
   //Para cada enemigo del array...
   for (let i = 0; i < enemies.length; i++) {
     const enemy = enemies[i];
+    //Mirar si hay colisión con el player
+    if (checkCollision(player, enemy)) {
+      isPlaying = false;
+      alert("Game Over");
+      window.location = ""; //refrescar la página
+    }
     //Mover el enemy
     enemy.y += enemy.speedY;
     //Chequear la colisión con el borde inferior
@@ -103,6 +116,8 @@ function draw() {
   ctx.fillStyle = player.color;
   ctx.fillRect(player.x, player.y, player.w, player.h);
 
+  //Dibujamos la meta
+
   //Dibuja los enemigos del array
   for (let i = 0; i < enemies.length; i++) {
     const enemy = enemies[i];
@@ -111,7 +126,24 @@ function draw() {
   }
 }
 
-setInterval(function () {
-  draw();
+function checkCollision(rect1, rect2) {
+  const colX = rect1.x + rect1.w > rect2.x && rect1.x < rect2.x + rect2.w;
+  const colY = rect1.y + rect1.h > rect2.y && rect1.y < rect2.y + rect2.h;
+  return colX && colY;
+}
+
+// setInterval(function () {
+//   draw();
+//   update();
+// }, 20);
+
+function step() {
   update();
-}, 20);
+  draw();
+  if (isPlaying) {
+    window.requestAnimationFrame(step);
+  }
+}
+
+//Paso inicial
+step();
