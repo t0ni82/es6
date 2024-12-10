@@ -35,7 +35,11 @@ const enemies = [
     speedY: 0.5,
   },
 ];
-
+/**
+ * Añadir enemigos hasta 5 y modificar el update y el draw
+ * para que se muevan y dibujen todos. Pista: usa un bucle for
+ * para recorrer el array
+ */
 function update() {
   //Mover el enemy
   enemies[0].y += enemies[0].speedY;
