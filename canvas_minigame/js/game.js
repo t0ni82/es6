@@ -41,24 +41,30 @@ const enemies = [
  * para recorrer el array
  */
 function update() {
-  //Mover el enemy
-  enemies[0].y += enemies[0].speedY;
-  //Chequear la colisión con el borde inferior
-  if (enemies[0].y + enemies[0].h >= GAME_H) {
-    enemies[0].y = GAME_H - enemies[0].h;
-    enemies[0].speedY = enemies[0].speedY * -1;
-  } else if (enemies[0].y <= 0) {
-    //Chequear la colisión con el borde superior
-    enemies[0].y = 0;
-    enemies[0].speedY = enemies[0].speedY * -1;
+  //Para cada enemigo del array...
+  for (let i = 0; i < enemies.length; i++) {
+    const enemy = enemies[i];
+    //Mover el enemy
+    enemy.y += enemy.speedY;
+    //Chequear la colisión con el borde inferior
+    if (enemy.y + enemy.h >= GAME_H) {
+      enemy.y = GAME_H - enemy.h;
+      enemy.speedY = enemy.speedY * -1;
+    } else if (enemy.y <= 0) {
+      //Chequear la colisión con el borde superior
+      enemy.y = 0;
+      enemy.speedY = enemy.speedY * -1;
+    }
   }
-  //   console.log(enemy);
 }
 
 function draw() {
   ctx.clearRect(0, 0, GAME_W, GAME_H);
-  ctx.fillStyle = enemies[0].color;
-  ctx.fillRect(enemies[0].x, enemies[0].y, enemies[0].w, enemies[0].h);
+  for (let i = 0; i < enemies.length; i++) {
+    const enemy = enemies[i];
+    ctx.fillStyle = enemy.color;
+    ctx.fillRect(enemy.x, enemy.y, enemy.w, enemy.h);
+  }
 }
 
 setInterval(function () {
