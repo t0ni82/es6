@@ -33,10 +33,17 @@ const player = {
   w: 40,
   h: 40,
   color: "green",
-  speedX: 1,
+  speedX: 4,
   isMoving: false,
 };
 //Crear la meta
+const meta = {
+  x: GAME_W - 40,
+  y: GAME_H / 2 - 20,
+  w: 40,
+  h: 40,
+  color: "orange",
+};
 
 const enemies = [
   {
@@ -84,6 +91,11 @@ function update() {
   }
 
   //Miramos si chocamos con la meta si es así has ganado
+  if (checkCollision(player, meta)) {
+    isPlaying = false;
+    alert("Has ganado!!!");
+    window.location = ""; //refrescar la página
+  }
 
   //Para cada enemigo del array...
   for (let i = 0; i < enemies.length; i++) {
@@ -117,6 +129,8 @@ function draw() {
   ctx.fillRect(player.x, player.y, player.w, player.h);
 
   //Dibujamos la meta
+  ctx.fillStyle = meta.color;
+  ctx.fillRect(meta.x, meta.y, meta.w, meta.h);
 
   //Dibuja los enemigos del array
   for (let i = 0; i < enemies.length; i++) {
