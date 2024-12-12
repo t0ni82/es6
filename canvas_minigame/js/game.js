@@ -133,11 +133,15 @@ function draw() {
   ctx.fillRect(meta.x, meta.y, meta.w, meta.h);
 
   //Dibuja los enemigos del array
-  for (let i = 0; i < enemies.length; i++) {
-    const enemy = enemies[i];
+  // for (let i = 0; i < enemies.length; i++) {
+  //   const enemy = enemies[i];
+  //   ctx.fillStyle = enemy.color;
+  //   ctx.fillRect(enemy.x, enemy.y, enemy.w, enemy.h);
+  // }
+  enemies.forEach(function (enemy) {
     ctx.fillStyle = enemy.color;
     ctx.fillRect(enemy.x, enemy.y, enemy.w, enemy.h);
-  }
+  });
 }
 
 function checkCollision(rect1, rect2) {
