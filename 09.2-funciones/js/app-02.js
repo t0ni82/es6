@@ -1,4 +1,5 @@
 //Más sobre callbacks
+//Muestra de datos
 const recetaChipirones = {
   nombre: "Chipirones al pil-pil",
   ingredientes: "chipirones",
@@ -9,7 +10,7 @@ const recetaPatatas = {
   ingredientes: "patatas",
   tiempoCoccion: 8000,
 };
-
+//Declaracion de funciones
 function cocinar(receta, callback) {
   console.log(`Oido cocina: una de ${receta.nombre}...`);
   console.log(`Preparando ingredientes ${receta.ingredientes}`);
@@ -27,6 +28,9 @@ function paraLlevar(plato) {
   console.log(`!El ${plato} listo para Glovo`);
 }
 
-console.log("Iniciando pedidos...");
-cocinar(recetaChipirones, servirPlato);
-cocinar(recetaPatatas, paraLlevar);
+// console.log("Iniciando pedidos...");
+cocinar(recetaChipirones, paraLlevar);
+cocinar(recetaPatatas, servirPlato);
+cocinar(recetaChipirones, (plato) => {
+  console.log(plato + " en tupper!");
+});
