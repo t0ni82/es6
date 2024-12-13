@@ -29,8 +29,17 @@ function paraLlevar(plato) {
 }
 
 // console.log("Iniciando pedidos...");
-cocinar(recetaChipirones, paraLlevar);
-cocinar(recetaPatatas, servirPlato);
-cocinar(recetaChipirones, (plato) => {
-  console.log(plato + " en tupper!");
-});
+
+cocinar(recetaPatatas, servirPlato); //8s
+cocinar(recetaChipirones, paraLlevar); //5s
+
+let segundos = 0;
+// const incrementarSegundos = function () {
+//   console.log("Segundo: " + segundos);
+//   segundos++;
+// };
+// setInterval(incrementarSegundos, 1000);
+setInterval(() => {
+  console.log("Segundo: " + segundos);
+  segundos++;
+}, 1000);
