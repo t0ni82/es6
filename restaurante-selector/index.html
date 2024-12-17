@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drag and Drop Restaurantes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .dropzone {
+            min-height: 50px;
+            border: 2px dashed #ccc;
+            border-radius: 5px;
+            padding: 5px;
+        }
+
+        .student {
+            display: inline-block;
+            margin: 3px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="flex flex-col lg:flex-row justify-around gap-5 p-5">
+        <!-- Contenedor de Alumnos -->
+        <div id="students" class="border border-gray-400 p-5 w-full lg:w-1/3 bg-white rounded-md shadow-md">
+            <h3 class="text-lg font-bold mb-3">Alumnos</h3>
+            <form id="student-form" class="mb-5">
+                <input id="student-name" type="text" placeholder="Nombre del alumno"
+                    class="border border-gray-300 rounded-md p-2 w-full mb-2" />
+                <button type="submit" class="bg-blue-500 text-white p-2 rounded-md w-full">Añadir Alumno</button>
+            </form>
+            <div id="student-list" class="flex flex-wrap gap-2">
+                <!-- Alumnos añadidos dinámicamente aparecerán aquí -->
+            </div>
+        </div>
+
+        <!-- Contenedor de Restaurantes -->
+        <div id="restaurants" class="w-full lg:w-2/3 bg-white rounded-md">
+            <h3 class="text-lg font-bold mb-3">Restaurantes</h3>
+            <form id="restaurant-form" class="mb-5">
+                <input id="restaurant-name" type="text" placeholder="Nombre del restaurante"
+                    class="border border-gray-300 rounded-md p-2 w-full mb-2" />
+                <button type="submit" class="bg-green-500 text-white p-2 rounded-md w-full">Añadir Restaurante</button>
+            </form>
+            <div id="restaurant-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Restaurantes añadidos dinámicamente aparecerán aquí -->
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        const studentsContainer = document.querySelector('#student-list');
+        const restaurantsContainer = document.querySelector('#restaurant-list');
+
+        // Cargar datos desde Local Storage
+        const appData = JSON.parse(localStorage.getItem('dragAndDropAppData')) || { students: {}, restaurants: {} };
+
+        function saveData()
+        {
+            localStorage.setItem('dragAndDropAppData', JSON.stringify(appData));
+        }
+
+        function getRandomColor()
+        {
+            const colors = [
+                'bg-red-500', 'bg-blue-500', 'bg-green-500',
+                'bg-yellow-500', 'bg-purple-500', 'bg-pink-500'
+            ];
+            const textColors = ['text-white', 'text-gray-800'];
+            return {
+                bg: colors[Math.floor(Math.random() * colors.length)],
+                text: textColors[Math.floor(Math.random() * textColors.length)],
+            };
+        }
+
+        function renderStudents()
+        {
+            studentsContainer.innerHTML = '';
+            // Mostrar solo los estudiantes que no están asignados a ningún restaurante
+            const assignedStudents = new Set(
+                Object.values(appData.restaurants).flatMap(restaurant => restaurant.students)
+            );
+            for (const [name, colors] of Object.entries(appData.students))
+            {
+                if (!assignedStudents.has(name))
+                {
+                    const studentElement = createStudentElement(name, colors);
+                    studentsContainer.appendChild(studentElement);
+                }
+            }
+        }
+
+        function renderRestaurants()
+        {
+            restaurantsContainer.innerHTML = '';
+            for (const [id, restaurant] of Object.entries(appData.restaurants))
+            {
+                const restaurantElement = createRestaurantElement(id, restaurant.name);
+                const dropzone = restaurantElement.querySelector('.dropzone');
+                restaurant.students.forEach(studentName =>
+                {
+                    const colors = appData.students[studentName];
+                    const studentElement = createStudentElement(studentName, colors);
+                    dropzone.appendChild(studentElement);
+                });
+                restaurantsContainer.appendChild(restaurantElement);
+            }
+        }
+
+        function createStudentElement(name, colors)
+        {
+            const studentElement = document.createElement('div');
+            studentElement.textContent = name;
+            studentElement.setAttribute('draggable', 'true');
+            studentElement.className = `student ${colors.bg} ${colors.text} text-sm font-medium px-3 py-1 rounded-full shadow-md cursor-move`;
+            attachDragEvents(studentElement);
+            return studentElement;
+        }
+
+        function createRestaurantElement(id, name)
+        {
+            const restaurantElement = document.createElement('div');
+            restaurantElement.innerHTML = `
+        <h4 class='font-bold text-center mb-2'>${name}</h4>
+        <div class='dropzone flex flex-col gap-2'></div>`;
+            restaurantElement.className = 'restaurant bg-gray-100 p-5 rounded-lg shadow-md';
+            restaurantElement.setAttribute('data-id', id);
+            attachDropEvents(restaurantElement);
+            return restaurantElement;
+        }
+
+        document.querySelector('#student-form').addEventListener('submit', (e) =>
+        {
+            e.preventDefault();
+            const studentName = document.querySelector('#student-name').value.trim();
+            if (studentName && !appData.students[studentName])
+            {
+                const colors = getRandomColor();
+                appData.students[studentName] = colors;
+                saveData();
+                renderStudents();
+                document.querySelector('#student-name').value = '';
+            }
+        });
+
+        document.querySelector('#restaurant-form').addEventListener('submit', (e) =>
+        {
+            e.preventDefault();
+            const restaurantName = document.querySelector('#restaurant-name').value.trim();
+            if (restaurantName)
+            {
+                const id = Date.now().toString();
+                appData.restaurants[id] = { name: restaurantName, students: [] };
+                saveData();
+                renderRestaurants();
+                document.querySelector('#restaurant-name').value = '';
+            }
+        });
+
+        function attachDragEvents(student)
+        {
+            student.addEventListener('dragstart', (e) =>
+            {
+                e.dataTransfer.setData('text/plain', student.textContent);
+                e.target.style.opacity = '0.5';
+            });
+
+            student.addEventListener('dragend', (e) =>
+            {
+                e.target.style.opacity = '1';
+            });
+        }
+
+        function attachDropEvents(restaurantElement)
+        {
+            const dropzone = restaurantElement.querySelector('.dropzone');
+            restaurantElement.addEventListener('dragover', (e) =>
+            {
+                e.preventDefault();
+                dropzone.style.backgroundColor = 'rgba(0, 128, 0, 0.1)';
+            });
+
+            restaurantElement.addEventListener('dragleave', (e) =>
+            {
+                dropzone.style.backgroundColor = '';
+            });
+
+            restaurantElement.addEventListener('drop', (e) =>
+            {
+                e.preventDefault();
+                dropzone.style.backgroundColor = '';
+
+                const studentName = e.dataTransfer.getData('text/plain');
+                if (!appData.students[studentName]) return;
+
+                // Mover estudiante a otro restaurante
+                for (const restaurant of Object.values(appData.restaurants))
+                {
+                    const index = restaurant.students.indexOf(studentName);
+                    if (index !== -1)
+                    {
+                        restaurant.students.splice(index, 1);
+                    }
+                }
+
+                const restaurantId = restaurantElement.getAttribute('data-id');
+                appData.restaurants[restaurantId].students.push(studentName);
+                saveData();
+                renderRestaurants();
+                renderStudents();
+            });
+        }
+
+        // Inicializar la app
+        renderStudents();
+        renderRestaurants();
+    </script>
+</body>
+
+</html>
