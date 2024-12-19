@@ -39,21 +39,22 @@ class Parking {
   registrarVehiculo(matricula) {
     //La matricula no puede repetirse
     if (this.vehiculos.has(matricula)) {
-      console.log(`La matricula ${matricula} va está registrada`);
-      return; //if else vs early return
+      console.log(`La matricula ${matricula} ya está registrada`);
+      return; //if else vs early return salimos del método
     }
     //Buscar plaza libre
     const plazaLibre = this.plazas.find((plaza) => !plaza.ocupada);
+    //Sinó hay plazas no se puede aparcar
     if (!plazaLibre) {
-      console.log(`El parquin está lleno!!`);
-      return;
+      console.log(`El parking está lleno!!`);
+      return; //salimos del método
     }
-
-    //TODO sinó hay plazas no se puede aparcar
+    //Creamos un registro del vehiculo con la hora de entrada
     const horaEntrada = new Date();
     const vehiculo = new Vehiculo(matricula, horaEntrada);
-    plazaLibre.ocupar();
+    plazaLibre.ocupar(); //maracamos la plaza como ocupada
 
+    //Añadimos el registro a la lista de vehiculos del parking
     this.vehiculos.set(matricula, { vehiculo, plaza: plazaLibre });
     console.log(
       `Vehículo ${vehiculo.matricula} registrado en la plaza ${
