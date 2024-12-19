@@ -85,15 +85,16 @@ class Parking {
     console.log(`Hora de entrada: ${vehiculo.horaEntrada.toLocaleString()}`);
     console.log(`Hora de salida: ${horaSalida.toLocaleString()}`);
     console.log(`Coste total: ${coste}`);
-    console.log("=================================");
+    console.log("===============================");
   }
   calcularCoste(horaEntrada, horaSalida) {
     //restar las fechas y multiplicar por precioPorHora
-    return 0;
+    const tiempoEstacionado = (horaSalida - horaEntrada) / (1000 * 60 * 60);
+    return (tiempoEstacionado * this.precioPorHora).toFixed(2);
   }
 }
 
-const parking = new Parking(4, 6);
+const parking = new Parking(10, 60);
 
 /**
  *
@@ -107,3 +108,14 @@ function registroVehiculos() {
     parking.registrarVehiculo(m);
   }
 }
+registroVehiculos(); //Registramos 3 vehiculos
+
+parking.registrarVehiculo("1111AAA"); //No permitido
+
+setTimeout(() => {
+  parking.generarTicket("1234ABC");
+}, 10000); //simula 2 segundis de estacionamiento
+
+setTimeout(() => {
+  parking.generarTicket("2222BBB");
+}, 20000); //simula 2 segundis de estacionamiento
