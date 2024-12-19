@@ -62,14 +62,48 @@ class Parking {
       }`
     );
   }
+  generarTicket(matricula) {
+    //TODO cambiar la clave de identificaíon de entrada unica de matricula a un UUID
+    const registro = this.vehiculos.get(matricula);
+    if (!registro) {
+      console.log(`No hay ningun registro con la matricula ${matricula}`);
+      return;
+    }
+    //Registrar hora de salida
+    console.log(registro);
+    const { vehiculo, plaza } = registro; //usamos desestructuración
+    //calcular importe
+    const horaSalida = new Date();
+    const coste = this.calcularCoste(vehiculo.horaEntrada, horaSalida);
+    //Liberar el registro de la plaza
+    plaza.liberar();
+    this.vehiculos.delete(matricula);
+    //Imprimir el tiket
+    console.log("============ TIQUET ===========");
+    console.log(`Matricula: ${vehiculo.matricula}`);
+    console.log(`Plaza: ${plaza.zona + plaza.numero}`);
+    console.log(`Hora de entrada: ${vehiculo.horaEntrada.toLocaleString()}`);
+    console.log(`Hora de salida: ${horaSalida.toLocaleString()}`);
+    console.log(`Coste total: ${coste}`);
+    console.log("=================================");
+  }
+  calcularCoste(horaEntrada, horaSalida) {
+    //restar las fechas y multiplicar por precioPorHora
+    return 0;
+  }
 }
 
 const parking = new Parking(4, 6);
 
-//zona testing
+/**
+ *
+ *
+ * zona testing
+ */
+//Funcion para cargar vehiculos en el parking
 function registroVehiculos() {
   const matriculas = ["1234ABC", "1111AAA", "2222BBB"];
-  matriculas.forEach((matricula) => {
-    parking.registrarVehiculo(matricula);
-  });
+  for (let m of matriculas) {
+    parking.registrarVehiculo(m);
+  }
 }
