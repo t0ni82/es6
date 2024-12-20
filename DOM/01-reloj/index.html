@@ -44,32 +44,32 @@
         }
     </style>
     <script>
-        document.addEventListener("load", () =>
-        {
-            //Nos traemos una reféncia de
-            //los elementos que neceitamos modificar
-            const hour1 = document.getElementById("hour1")
-            const hour2 = document.getElementById("hour2")
-            const minute1 = document.getElementById("minute1")
-            const minute2 = document.getElementById("minute2")
-            const second1 = document.getElementById("second1")
-            const second2 = document.getElementById("second2")
+        // document.addEventListener("DOMContentLoaded", () =>
+        // {
+        //     //Nos traemos una reféncia de
+        //     //los elementos que neceitamos modificar
+        //     const hour1 = document.getElementById("hour1")
+        //     const hour2 = document.getElementById("hour2")
+        //     const minute1 = document.getElementById("minute1")
+        //     const minute2 = document.getElementById("minute2")
+        //     const second1 = document.getElementById("second1")
+        //     const second2 = document.getElementById("second2")
 
-            const now = new Date();
-            const hours = now.getHours().toString().padStart(2, '0');//00001
-            const minutes = now.getMinutes().toString().padStart(2, '0');;
-            const seconds = now.getSeconds().toString().padStart(2, '0');;
+        //     const now = new Date();
+        //     const hours = now.getHours().toString().padStart(2, '0');//00001
+        //     const minutes = now.getMinutes().toString().padStart(2, '0');;
+        //     const seconds = now.getSeconds().toString().padStart(2, '0');;
 
-            hour1.textContent = hours[0]
-            hour2.textContent = hours[1]
-            minute1.textContent = minutes[0]
-            minute2.textContent = minutes[1]
-            second1.textContent = seconds[0]
-            second2.textContent = seconds[1]
-            //Encapsular el codigo en una funcion
-            //llamar a la funcion cada segundo para refrescar
-            //el reloj
-        })
+        //     hour1.textContent = hours[0]
+        //     hour2.textContent = hours[1]
+        //     minute1.textContent = minutes[0]
+        //     minute2.textContent = minutes[1]
+        //     second1.textContent = seconds[0]
+        //     second2.textContent = seconds[1]
+        //     //Encapsular el codigo en una funcion
+        //     //llamar a la funcion cada segundo para refrescar
+        //     //el reloj
+        // })
 
     </script>
 </head>
@@ -86,7 +86,7 @@
         <div id="second1" class="digit">0</div>
         <div id="second2" class="digit">0</div>
     </div>
-
+    <script src="js/script.js"></script>
 </body>
 
 </html>
