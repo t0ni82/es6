@@ -13,3 +13,7 @@ itemInput.addEventListener("keyup", () => {
   console.log(itemInput.value);
   tituloPrincipal.innerText = itemInput.value;
 });
+
+//Seleccionar el boton
+//añadirle un evento onclick
+//Actualizar el contenido del h1 con el value del input
