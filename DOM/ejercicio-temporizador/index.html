@@ -43,16 +43,25 @@
     <h2 id="end-time-msg"></h2><!-- TODO texto de se acabó el tiempo -->
     <div id="timer" class="timer"></div>
     <label for="init-time-input">Tiempo inicial en segundos</label><br>
-    <input id="init-time-input" type="text">
+    <input id="init-time-input" type="number" value="60">
+    <button id="btn-set-time">segundos</button>
     <button id="btn-start">Start</button>
 
     <script>
 
-        const display = document.querySelector("#timer")
-        const btnStart = document.querySelector("#btn-start");
-        const endTimeMsg = document.querySelector("#end-time-msg");
+        const display = document.querySelector("#timer");//Zona donde se vee el numero
+        const btnStart = document.querySelector("#btn-start");//Boton de start
+        const endTimeMsg = document.querySelector("#end-time-msg");//Zona donde mostrara el mensage final
+        const btnSetTime = document.querySelector("#btn-set-time");//boton que establece los seguondos
+        const initTimeInput = document.querySelector("#init-time-input")//input del que leemos los segundos del usuario
 
-        let seconds = 10;//TODO leer este valor desde un input
+        let seconds = initTimeInput.value;//valor de los segundos por defecto segun el value
+
+        btnSetTime.addEventListener("click", () =>
+        {
+            seconds = initTimeInput.value;
+            updateDisplay();//refrescar el display
+        })
 
         btnStart.addEventListener("click", function ()
         {
@@ -80,7 +89,7 @@
                 {
                     clearInterval(countDown)
                     // alert(" se acabó el tiempo!!")
-                    endTimeMsg.innerHTML = "Se acabó el tiempo!!"
+                    endTimeMsg.textContent = "Se acabó el tiempo!!"
                 }
 
             }, 1000);
