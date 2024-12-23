@@ -4,11 +4,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Pomodoro</title>
 </head>
 
 <body>
+    <h1>Pomodoro</h1>
+    <div id="timer"></div>
+    <button id="btn-start">Start</button>
+    <script>
+        let timeLeft = 10;
+        const display = document.querySelector("#timer");
+        const btnStart = document.querySelector("#btn-start");
 
+        btnStart.addEventListener("click", () =>
+        {
+            console.log("Start counter");
+            start(timeLeft);
+        })
+
+        function updateDisplay(seconds)
+        {
+            display.textContent = seconds
+        }
+
+        function start(seconds)
+        {
+            updateDisplay(seconds);
+            const countDown = setInterval(() =>
+            {
+                if (seconds > 0)
+                {
+                    console.clear();
+                    console.log(seconds);
+                    seconds--
+                    updateDisplay(seconds)
+                }
+                else
+                {
+                    clearInterval(countDown)
+                    alert(" se acabó el tiempo!!")
+                }
+
+            }, 1000);
+        }
+
+        updateDisplay(timeLeft);
+
+    </script>
 </body>
 
 </html>
