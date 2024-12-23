@@ -5,31 +5,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pomodoro</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f8ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .timer {
+            font-size: 48px;
+            margin: 20px 0;
+        }
+
+        button {
+            font-size: 16px;
+            margin: 5px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        h2 {
+            color: red;
+        }
+    </style>
 </head>
 
 <body>
     <h1>Pomodoro</h1>
-    <div id="timer"></div>
+    <h2 id="end-time-msg"></h2><!-- TODO texto de se acabó el tiempo -->
+    <div id="timer" class="timer"></div>
+    <label for="init-time-input">Tiempo inicial en segundos</label><br>
+    <input id="init-time-input" type="text">
     <button id="btn-start">Start</button>
-    <script>
-        let timeLeft = 10;
-        const display = document.querySelector("#timer");
-        const btnStart = document.querySelector("#btn-start");
 
-        btnStart.addEventListener("click", () =>
+    <script>
+
+        const display = document.querySelector("#timer")
+        const btnStart = document.querySelector("#btn-start");
+        const endTimeMsg = document.querySelector("#end-time-msg");
+
+        let seconds = 10;//TODO leer este valor desde un input
+
+        btnStart.addEventListener("click", function ()
         {
             console.log("Start counter");
-            start(timeLeft);
+            start();
         })
 
-        function updateDisplay(seconds)
+        function updateDisplay()
         {
             display.textContent = seconds
         }
 
-        function start(seconds)
+        function start()
         {
-            updateDisplay(seconds);
             const countDown = setInterval(() =>
             {
                 if (seconds > 0)
@@ -42,13 +79,14 @@
                 else
                 {
                     clearInterval(countDown)
-                    alert(" se acabó el tiempo!!")
+                    // alert(" se acabó el tiempo!!")
+                    endTimeMsg.innerHTML = "Se acabó el tiempo!!"
                 }
 
             }, 1000);
         }
 
-        updateDisplay(timeLeft);
+        updateDisplay(seconds);
 
     </script>
 </body>
