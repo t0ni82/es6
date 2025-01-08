@@ -30,6 +30,7 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            background-color: #365a7a;
         }
 
         h2 {
@@ -61,6 +62,7 @@
         {
             seconds = initTimeInput.value;
             updateDisplay();//refrescar el display
+
         })
 
         btnStart.addEventListener("click", function ()
@@ -80,7 +82,7 @@
             {
                 if (seconds > 0)
                 {
-                    console.clear();
+                    // console.clear();
                     console.log(seconds);
                     seconds--
                     updateDisplay(seconds)
@@ -90,11 +92,22 @@
                     clearInterval(countDown)
                     // alert(" se acabó el tiempo!!")
                     endTimeMsg.textContent = "Se acabó el tiempo!!"
+                    btnStart.disabled = false;
                 }
 
             }, 1000);
+            console.log("Soy un nuevo setInterval", countDown);
+            //desabilitar el boton de start
+            btnStart.disabled = true;
+
         }
 
+        function restart()
+        {
+            seconds = initTimeInput.value;
+            updateDisplay();
+            endTimeMsg.textContent = "";
+        }
         updateDisplay(seconds);
 
     </script>
