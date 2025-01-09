@@ -1,0 +1,26 @@
+{
+    "data": [
+      {
+        "id": 1,
+        "status": "published",
+        "sort": null,
+        "user_created": "51b48f6e-5336-4714-99a0-4f1439686caf",
+        "date_created": "2025-01-08T11:04:16.083Z",
+        "user_updated": "51b48f6e-5336-4714-99a0-4f1439686caf",
+        "date_updated": "2025-01-08T12:49:22.647Z",
+        "title": "Teclado usb",
+        "imagen": "b03d0c33-4ed5-4088-a951-a6cd91ad0153"
+      },
+      {
+        "id": 2,
+        "status": "published",
+        "sort": null,
+        "user_created": "51b48f6e-5336-4714-99a0-4f1439686caf",
+        "date_created": "2025-01-08T12:56:53.218Z",
+        "user_updated": null,
+        "date_updated": null,
+        "title": "Ratón USB",
+        "imagen": "54fc9142-0c1c-4d91-8da3-006e46c2b121"
+      }
+    ]
+  }

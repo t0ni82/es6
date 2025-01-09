@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nevegar por el DOM</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1 id="titulo">Navegar por el DOM</h1>
+        <div class="padre">Hola
+            <!--Soy un comentario -->
+            <div class="hijo">
+                asjfkjdfñjf3
+            </div>
+            <div class="hijo">
+                Hijo 1 <span style="color: red">Dentro del span</span> después del span
+            </div>
+            <div class="hijo">
+                Hijo 2
+            </div>
+            <div class="hijo">
+                Hijo 3
+            </div>
+        </div>
+    </div>
+    <script>
+        //traer una refernecia al div de la classe padre
+        const padre = document.querySelector(".padre")
+        let out;
+        out = padre
+        //Obtener hijos de un elemento
+        out = padre.childNodes
+        out = padre.children
+        out = padre.children[0].innerText
+        out = padre.children[0].textContent
+        out = padre.children[0].innerHTML
+
+        //seleccionar el primer hijo
+        out = padre.firstChild//primer nodo
+        out = padre.firstElementChild//primer elemento
+        //seleccionar el ultimo hijo
+        out = padre.lastChild
+        out = padre.lastElementChild
+        //Obtener el elemento padre
+        const h1Hijo = document.querySelector('#titulo')
+        out = h1Hijo.parentNode//nodo padre
+        out = h1Hijo.parentElement//elemento padre
+
+        //Obtener los elementos hermanos
+        const hijo2 = document.querySelector(".hijo:nth-child(2)");
+        out = hijo2.style.color = "green"
+        out = hijo2.nextElementSibling.style.backgroundColor = "orange"
+        out = hijo2.previousElementSibling.style.backgroundColor = "blue"
+        console.log(out);
+    </script>
+</body>
+
+</html>
