@@ -3,10 +3,22 @@
 <div class="key">65<small>e.keyCode</small></div>
 <div class="key">KeyA<small>e.code</small></div>
  */
-const insertDiv = document.querySelector("#insert");
-window.addEventListener("keyup", (e) => {
+
+function getKeyCodeInnerHTML(e) {
   console.log(e);
-  insertDiv.innerHTML = `<div class="key">a
-                                <small>e.key</small>
-                        </div>`;
-});
+  const insertDiv = document.querySelector("#insert");
+  insertDiv.innerHTML = `<div class="key">${e.key === " " ? "Espacio" : e.key}
+                                  <small>e.key</small>
+                          </div>
+                          <div class="key">${e.keyCode}
+                                  <small>e.keyCode</small>
+                          </div>
+                          <div class="key">${e.code}
+                                  <small>e.code</small>
+                          </div>`;
+}
+function getKeyCodeCreateNodes(e) {
+  //TODO obtener la mima funcionalidad que la funcion anterior
+  //pero usando createElement, createTextNode y appendChild
+}
+window.addEventListener("keyup", getKeyCodeInnerHTML);
