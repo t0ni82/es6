@@ -1,9 +1,3 @@
-/*
-<div class="key">a<small>e.key</small></div>
-<div class="key">65<small>e.keyCode</small></div>
-<div class="key">KeyA<small>e.code</small></div>
- */
-
 function getKeyCodeInnerHTML(e) {
   console.log(e);
   const insertDiv = document.querySelector("#insert");
@@ -21,4 +15,5 @@ function getKeyCodeCreateNodes(e) {
   //TODO obtener la mima funcionalidad que la funcion anterior
   //pero usando createElement, createTextNode y appendChild
 }
-window.addEventListener("keyup", getKeyCodeInnerHTML);
+// window.addEventListener("keyup", getKeyCodeInnerHTML);
+window.addEventListener("keyup", getKeyCodeCreateNodes);
