@@ -1,39 +1,38 @@
-//Rapida de escribir pero poco eficiente
-/*
-      <li>
-        Leche
-        <button class="remove-item btn-link text-red">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-      </li>
-*/
-
-//Traer referencia del input
+const itemForm = document.querySelector("#item-form");
 const itemInput = document.querySelector("#item-input");
-//Traer una referencia al boton
-const btnAddItem = document.querySelector("#mi-boton");
-//Traer una referencia a la lista
 const lista = document.querySelector("#item-list");
 
 //Event Listeners
-btnAddItem.addEventListener("click", () => {
+itemForm.addEventListener("submit", (evt) => {
+  console.log(evt);
+  evt.preventDefault();
   console.log("Añadir item!!!", itemInput.value);
-  console.time("version-A");
-  createListItem1(itemInput.value);
-  console.timeEnd("version-A");
+  const newItem = createListItem(itemInput.value);
+  lista.appendChild(newItem);
 });
 
-//funciones
-//Version senzilla pero no demasiado limpia
-function createListItem1(textItem) {
-  let listaTextoHtml = lista.innerHTML;
-  listaTextoHtml += `<li>${textItem}
-                           <button class="remove-item btn-link text-red">
-                              <i class="fa-solid fa-xmark"></i>
-                          </button>
-                      </li>`;
-  lista.innerHTML = listaTextoHtml;
+//Limpia y más rendimiento
+function createListItem(textItem) {
+  const li = document.createElement("li"); //<li></li>
+  const text = document.createTextNode(textItem); //texto...
+  li.appendChild(text); //<li>texto...</li>
+
+  const button = createButton("remove-item btn-link text-red");
+  li.appendChild(button);
+  return li;
 }
 
-//Limpia y más rendimiento
-function createListItem2(textItem) {}
+function createButton(clases) {
+  const button = document.createElement("button");
+  button.className = clases;
+
+  const icon = createIcon("fa-solid fa-xmark");
+  button.appendChild(icon);
+  return button;
+}
+
+function createIcon(clases) {
+  const icon = document.createElement("i");
+  icon.className = clases;
+  return icon;
+}
