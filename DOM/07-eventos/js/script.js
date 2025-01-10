@@ -14,6 +14,13 @@ function getKeyCodeInnerHTML(e) {
 function getKeyCodeCreateNodes(e) {
   //TODO obtener la mima funcionalidad que la funcion anterior
   //pero usando createElement, createTextNode y appendChild
+  //Sin innerHtml
+  const insertDiv = document.querySelector("#insert");
+  const div = document.createElement("div");
+  /**
+   * El codigo retante aqui....
+   */
+  insertDiv.appendChild(div);
 }
 // window.addEventListener("keyup", getKeyCodeInnerHTML);
 window.addEventListener("keyup", getKeyCodeCreateNodes);
