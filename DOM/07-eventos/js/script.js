@@ -16,11 +16,29 @@ function getKeyCodeCreateNodes(e) {
   //pero usando createElement, createTextNode y appendChild
   //Sin innerHtml
   const insertDiv = document.querySelector("#insert");
-  const div = document.createElement("div");
-  /**
-   * El codigo retante aqui....
-   */
-  insertDiv.appendChild(div);
+  insertDiv.textContent = "";
+
+  const div1 = createDiv("e.key", e.key);
+  const div2 = createDiv("e.keyCode", e.keyCode);
+  const div3 = createDiv("e.code", e.code);
+
+  insertDiv.appendChild(div1);
+  insertDiv.appendChild(div2);
+  insertDiv.appendChild(div3);
 }
 // window.addEventListener("keyup", getKeyCodeInnerHTML);
 window.addEventListener("keyup", getKeyCodeCreateNodes);
+
+function createDiv(_keyText, _valueText) {
+  const div = document.createElement("div");
+  div.classList.add("key");
+
+  const small = document.createElement("small");
+  const keyText = document.createTextNode(_keyText);
+  small.appendChild(keyText);
+
+  const valueText = document.createTextNode(_valueText);
+  div.appendChild(valueText);
+  div.appendChild(small);
+  return div;
+}
