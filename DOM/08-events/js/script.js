@@ -40,9 +40,28 @@
 //   alert("Has clicado en el body!!");
 // });
 
-//Delegación de eventos
+//Sin Delegación de eventos
 //Obtener una referencia a la coleccion de li
+// const listaItems = document.querySelectorAll(".item");
 
-//usando un foreach añadir un evento click a cada li
+// //usando un foreach añadir un evento click a cada li
+// listaItems.forEach((item) => {
+//   item.addEventListener("click", (evt) => {
+//     console.log(evt);
+//     // evt.target.style.backgroundColor = "green";
+//     //usando la propiedad currenttarget del evento eliminar el li con remove()
+//     evt.target.remove();
+//   });
+// });
 
-//usando la propiedad currenttarget del evento eliminar el li con remove()
+//Con Delegación de eventos
+// const lista = document.querySelector("#item-list"); //ul
+// lista.addEventListener("click", (evt) => {
+//   // console.log(evt.currentTarget);
+//   console.log(evt.target);
+//   if (evt.target.tagName === "LI") {
+//     evt.target.remove();
+//   }
+// });
+
+/********* Window events *********/
