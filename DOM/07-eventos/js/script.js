@@ -18,13 +18,27 @@ function getKeyCodeCreateNodes(e) {
   const insertDiv = document.querySelector("#insert");
   insertDiv.textContent = "";
 
-  const div1 = createDiv("e.key", e.key);
-  const div2 = createDiv("e.keyCode", e.keyCode);
-  const div3 = createDiv("e.code", e.code);
+  const keyCodesArr = [
+    { name: "e.key", evento: e.key },
+    { name: "e.keyCode", evento: e.keyCode },
+    { name: "e.code", evento: e.code },
+  ];
 
-  insertDiv.appendChild(div1);
-  insertDiv.appendChild(div2);
-  insertDiv.appendChild(div3);
+  keyCodesArr.forEach((keyInfo) => {
+    const div = createDiv(keyInfo.name, keyInfo.evento);
+    insertDiv.appendChild(div);
+  });
+
+  //   const keyCodes = {
+  //     "e.key": e.key,
+  //     "e.keyCode": e.keyCode,
+  //     "e.code": e.code,
+  //   };
+
+  //   for (let key in keyCodes) {
+  //     const div = createDiv(key, keyCodes[key]);
+  //     insertDiv.appendChild(div);
+  //   }
 }
 // window.addEventListener("keyup", getKeyCodeInnerHTML);
 window.addEventListener("keyup", getKeyCodeCreateNodes);
