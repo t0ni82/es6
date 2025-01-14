@@ -75,6 +75,21 @@ function clearItems() {
   }
 }
 
+function filterItems(evt) {
+  const text = evt.target.value.toLowerCase();
+  const items = itemList.querySelectorAll("li");
+
+  items.forEach((item) => {
+    const itemName = item.firstChild.textContent.toLowerCase();
+
+    if (itemName.includes(text)) {
+      item.style.display = "flex";
+    } else {
+      item.style.display = "none";
+    }
+  });
+}
+
 function checkUI() {
   const items = itemList.querySelectorAll("li");
   if (items.length === 0) {
@@ -90,5 +105,6 @@ function checkUI() {
 itemForm.addEventListener("submit", addItem);
 itemList.addEventListener("click", removeItem);
 btnClear.addEventListener("click", clearItems);
+itemFilter.addEventListener("input", filterItems);
 
 checkUI();
