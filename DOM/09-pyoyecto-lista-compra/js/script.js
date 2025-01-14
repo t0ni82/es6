@@ -101,6 +101,28 @@ function checkUI() {
   }
 }
 
+/***************   Local Storage functions ****************/
+function addItemToLocalStorage(item) {}
+
+function getItemsFromLocalStorage() {
+  let itemsFromLocalStorage;
+  if (localStorage.getItem("lista") === null) {
+    itemsFromLocalStorage = [];
+  } else {
+    itemsFromLocalStorage = JSON.parse(localStorage.getItem("lista"));
+  }
+  //Quiero devolver un array, no texto ni null
+  return itemsFromLocalStorage;
+
+  /*
+  const items = localStorage.getItem("lista");
+  if (items === null) {
+    return [];
+  }
+  return JSON.parse(items);
+  */
+}
+
 //Event Listeners
 itemForm.addEventListener("submit", addItem);
 itemList.addEventListener("click", removeItem);
