@@ -4,7 +4,7 @@ const itemInput = document.querySelector("#item-input");
 const itemList = document.querySelector("#item-list");
 const btnClear = document.querySelector("#clear");
 const itemFilter = document.querySelector("#filter");
-const items = itemList.querySelectorAll("li");
+
 /**
  *
  * @param {SubmitEvent} evt
@@ -24,6 +24,8 @@ function addItem(evt) {
   const li = createNewItem(newItem);
   itemList.appendChild(li);
 
+  //Refrescamos el UI
+  checkUI();
   //Limpiar el campo de texto
   itemInput.value = "";
 }
@@ -56,21 +58,31 @@ function createIcon(clases) {
 
 function removeItem(evt) {
   if (evt.target.parentElement.classList.contains("remove-item")) {
-    evt.target.parentElement.parentElement.remove();
+    if (confirm("Vas ha eliminar el item")) {
+      evt.target.parentElement.parentElement.remove();
+      checkUI();
+    }
   }
 }
 
 function clearItems() {
   // itemList.innerHTML = "";
-  while (itemList.firstChild) {
-    itemList.removeChild(itemList.firstChild);
+  if (confirm("Vas ha eliminar toda la lista")) {
+    while (itemList.firstChild) {
+      itemList.removeChild(itemList.firstChild);
+    }
+    checkUI();
   }
 }
 
 function checkUI() {
+  const items = itemList.querySelectorAll("li");
   if (items.length === 0) {
     btnClear.style.display = "none";
     itemFilter.style.display = "none";
+  } else {
+    btnClear.style.display = "block";
+    itemFilter.style.display = "block";
   }
 }
 
