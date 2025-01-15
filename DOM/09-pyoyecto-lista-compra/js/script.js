@@ -31,6 +31,13 @@ function addItem(evt) {
     return;
   }
 
+  //si el elemeto existe no se añade
+  if (checkIfItemExists(newItem) !== -1) {
+    alert("El item ya está en la lista");
+    itemInput.value = "";
+    return;
+  }
+
   //Inserta el elemento en el DOM
   const li = createNewItem(newItem);
   itemList.appendChild(li);
@@ -44,22 +51,26 @@ function addItem(evt) {
   itemInput.value = "";
 }
 
-//TODO actualizar el LStorage al eliminar un item
 function removeItem(evt) {
   if (evt.target.parentElement.classList.contains("remove-item")) {
     if (confirm("Vas ha eliminar el item")) {
+      removeItemFromLocalStorage(
+        evt.target.parentElement.parentElement.textContent
+      );
       evt.target.parentElement.parentElement.remove();
       checkUI();
     }
   }
 }
-//TODO actualizar el LStorage al eliminar todos los items
+
 function clearItems() {
   // itemList.innerHTML = "";
   if (confirm("Vas ha eliminar toda la lista")) {
     while (itemList.firstChild) {
       itemList.removeChild(itemList.firstChild);
     }
+    //limpiar el localStorage
+    localStorage.removeItem("lista");
     checkUI();
   }
 }
@@ -153,8 +164,11 @@ function removeItemFromLocalStorage(item) {
   //Convertir el array a texto y lo guardamos
   localStorage.setItem("lista", JSON.stringify(itemsFromLocalStorage));
 }
-//funcion que devuelve el indice de un elemento
-//  si exixte en la lista o -1 si nó existe
+/**
+ *
+ * @param {String} item
+ * @returns el indice del item si lo ecuentra, sinó -1
+ */
 function checkIfItemExists(item) {
   //Traer los datos del localStorage
   const itemsFromLocalStorage = getItemsFromLocalStorage();
