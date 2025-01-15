@@ -215,6 +215,12 @@ function removeItemFromLocalStorage(item) {
   //Convertir el array a texto y lo guardamos
   localStorage.setItem("lista", JSON.stringify(itemsFromLocalStorage));
 }
+function updateItemFromLocalStorage(item, itemIndex) {
+  //Traer los datos del localStorage
+  const itemsFromLocalStorage = getItemsFromLocalStorage();
+  itemsFromLocalStorage.splice(itemIndex, 1, item); //TODO con map
+  localStorage.setItem("lista", JSON.stringify(itemsFromLocalStorage));
+}
 /**
  *
  * @param {String} item
@@ -226,8 +232,6 @@ function checkIfItemExists(item) {
   //Mira si existe
   return itemsFromLocalStorage.indexOf(item);
 }
-
-//TODO funcion update
 
 //Event Listeners
 itemForm.addEventListener("submit", addItem);
