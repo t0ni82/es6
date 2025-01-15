@@ -35,14 +35,23 @@ function addItem(evt) {
   //Miramos si estamos en modo edit
   if (isEditMode) {
     //Modo edicion
-    const setItemToEdit = document.querySelector(".edit-mode");
-    // const itemIndex = checkIfItemExists(setItemToEdit.textContent)
+    const itemToEdit = document.querySelector(".edit-mode");
 
-    if (setItemToEdit.textContent !== newItem) {
+    if (itemToEdit.textContent !== newItem) {
       //Actualizar de verdad en caso de que sea distinto
-      //al valor nievo del input y no exista en localSorage
+      //al valor nuevo del input y no exista en localSorage
+      if (checkIfItemExists(newItem) !== -1) {
+        alert("El item ya está en la lista");
+        itemInput.value = "";
+        return;
+      }
+      const itemIndex = checkIfItemExists(setItemToEdit.textContent);
+      updateItemFromLocalStorage(newItem, itemIndex);
+      itemToEdit.textContent = newItem;
+      const button = createButton("remove-item btn-link text-red");
+      itemToEdit.appendChild(button);
     }
-    setItemToEdit.classList.remove("edit-mode");
+    itemToEdit.classList.remove("edit-mode");
     isEditMode = false;
   } else {
     //Modo agregar nuevo
@@ -96,7 +105,7 @@ function setItemToEdit(item) {
   itemList.removeEventListener("click", onclickItem);
 
   itemList.querySelectorAll("li").forEach((item) => {
-    item.querySelector("i").classList.add("edit-mode");
+    item.querySelector("i").style.color = "#ccc";
   });
 }
 
@@ -127,32 +136,6 @@ function filterItems(evt) {
   });
 }
 
-/*********     Funciones para la creación de los elementos de la lista **********/
-function createNewItem(textItem) {
-  const li = document.createElement("li");
-  const text = document.createTextNode(textItem);
-  li.appendChild(text);
-
-  const button = createButton("remove-item btn-link text-red");
-  li.appendChild(button);
-  return li;
-}
-
-function createButton(clases) {
-  const button = document.createElement("button");
-  button.className = clases;
-
-  const icon = createIcon("fa-solid fa-xmark");
-  button.appendChild(icon);
-  return button;
-}
-
-function createIcon(clases) {
-  const icon = document.createElement("i");
-  icon.className = clases;
-  return icon;
-}
-
 /**
  * @description Habilita o desabilita los elementos graficos según si
  * hay items en la lista o no
@@ -178,6 +161,32 @@ function checkUI() {
   });
 
   isEditMode = false;
+}
+
+/*********     Funciones para la creación de los elementos de la lista **********/
+function createNewItem(textItem) {
+  const li = document.createElement("li");
+  const text = document.createTextNode(textItem);
+  li.appendChild(text);
+
+  const button = createButton("remove-item btn-link text-red");
+  li.appendChild(button);
+  return li;
+}
+
+function createButton(clases) {
+  const button = document.createElement("button");
+  button.className = clases;
+
+  const icon = createIcon("fa-solid fa-xmark");
+  button.appendChild(icon);
+  return button;
+}
+
+function createIcon(clases) {
+  const icon = document.createElement("i");
+  icon.className = clases;
+  return icon;
 }
 
 /***************   Local Storage functions ****************/
