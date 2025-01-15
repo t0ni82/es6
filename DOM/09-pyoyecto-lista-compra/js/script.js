@@ -43,6 +43,8 @@ function addItem(evt) {
   //Limpiar el campo de texto
   itemInput.value = "";
 }
+
+//TODO actualizar el LStorage al eliminar un item
 function removeItem(evt) {
   if (evt.target.parentElement.classList.contains("remove-item")) {
     if (confirm("Vas ha eliminar el item")) {
@@ -51,6 +53,7 @@ function removeItem(evt) {
     }
   }
 }
+//TODO actualizar el LStorage al eliminar todos los items
 function clearItems() {
   // itemList.innerHTML = "";
   if (confirm("Vas ha eliminar toda la lista")) {
