@@ -42,15 +42,15 @@ getData(
   }
 );
 
-// getData(
-//   "./pelis.json",
-//   (data) => {
-//     console.log("Las pelis són: ", data);
-//   },
-//   (error) => {
-//     console.log("Algo ha ido mal!!");
-//   }
-// );
+getData(
+  "./pelis.json",
+  (data) => {
+    console.log("Las pelis són: ", data);
+  },
+  (error) => {
+    console.log("Algo ha ido mal!!");
+  }
+);
 // getData(
 //   "./directores.json",
 //   (data) => {

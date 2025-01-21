@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Robert Zemeckis",
+        "age": 70,
+        "movies_directed": ["Forrest Gump"]
+    },
+    {
+        "name": "David Frankel",
+        "age": 63,
+        "movies_directed": ["The Devil Wears Prada"]
+    },
+    {
+        "name": "Christopher Nolan",
+        "age": 51,
+        "movies_directed": ["Inception"]
+    },
+    {
+        "name": "David O. Russell",
+        "age": 63,
+        "movies_directed": ["Silver Linings Playbook"]
+    }
+]
