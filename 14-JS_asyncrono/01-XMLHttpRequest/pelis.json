@@ -1,6 +1,4 @@
-{
-    "name": "metropolitan",
-    "cartelera": [
+[
         {
             "title": "Piratas del caribe",
             "year": 2003
@@ -17,5 +15,5 @@
             "title": "Avatar",
             "year": 2009
         }
-    ]
-}
+]
+
