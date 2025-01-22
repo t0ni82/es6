@@ -17,21 +17,21 @@ function getData(endpoint) {
   });
 }
 
-// getData("./peli.json")
-//   .then((pelis) => {
-//     console.log(pelis);
-//     return getData("./directores.json");
-//   })
-//   .then((directores) => {
-//     console.log(directores);
-//     return getData("./actores.json");
-//   })
-//   .then((actores) => {
-//     console.log(actores);
-//   })
-//   .catch((error) => {
-//     console.log(error);
-//   });
+getData("./peli.json")
+  .then((pelis) => {
+    console.log(pelis);
+    return getData("./directores.json");
+  })
+  .then((directores) => {
+    console.log(directores);
+    return getData("./actores.json");
+  })
+  .then((actores) => {
+    console.log(actores);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
 
 //Lo mismo con async await
 async function getAllData() {

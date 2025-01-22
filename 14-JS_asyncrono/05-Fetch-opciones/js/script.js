@@ -12,7 +12,9 @@ const apiUrl = "https://jsonplaceholder.typicode.com/todos";
 //Obtener los primeros X TODOS
 const getTodos = () => {
   fetch(apiUrl)
-    .then((res) => res.json())
+    .then((res) => {
+      return res.json();
+    })
     .then((data) => {
       data.forEach((todo) => {
         console.log(todo);
