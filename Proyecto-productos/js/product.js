@@ -15,7 +15,6 @@ const fetchProduct = async () => {
   }
 };
 
-
 const displayProduct = (product) => {
   console.log(product);
   const {
@@ -28,21 +27,28 @@ const displayProduct = (product) => {
   } = product.fields;
   const { url: img } = image[0];
   document.title = title.toUpperCase();
-  
+  //colores
+  const colorsList = colors
+    .map((color) => {
+      return `<span class="product-color" style="background: ${color}"></span>`;
+    })
+    .join("");
+
   productDOM.innerHTML = `<div class="product-wrapper">
-        <img src="${img}" class="img" alt="${}">
+        <img src="${img}" class="img" alt="${title}">
         <div class="product-info">
-          <h3>${}</h3>
-          <h5>${}</h5>
-          <span>${}</span>
+          <h3>${title}</h3>
+          <h5>${company}</h5>
+          <span>${price / 100}</span>
           <div class="colors">
-            <span class="product-color" style="background: #f15025"></span><span class="product-color" style="background: #222"></span>
+            ${colorList}
           </div>
-          <p>${}</p>
+          <p>${description}</p>
           <button class="btn">add to cart</button>
         </div>
-</div>`
+</div>`;
 };
+
 const start = async () => {
   const data = await fetchProduct();
   displayProduct(data);
