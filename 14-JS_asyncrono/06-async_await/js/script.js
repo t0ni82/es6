@@ -67,3 +67,8 @@ async function getAllDataPromiseAll() {
 getAllDataPromiseAll();
 console.log("Hilo principal");
 //Investigar promise.ALL
+
+//tratamiento de errores
+//try catch
+
+//Introdución a los modulos
