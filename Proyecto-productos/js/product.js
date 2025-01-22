@@ -15,24 +15,34 @@ const fetchProduct = async () => {
   }
 };
 
-/*
-<div class="product-wrapper">
-        <img src="https://course-api.com/images/store/product-1.jpeg" class="img" alt="high-back bench">
+
+const displayProduct = (product) => {
+  console.log(product);
+  const {
+    company,
+    colors,
+    description,
+    name: title,
+    price,
+    image,
+  } = product.fields;
+  const { url: img } = image[0];
+  document.title = title.toUpperCase();
+  
+  productDOM.innerHTML = `<div class="product-wrapper">
+        <img src="${img}" class="img" alt="${}">
         <div class="product-info">
-          <h3>high-back bench</h3>
-          <h5>ikea</h5>
-          <span>9.99</span>
+          <h3>${}</h3>
+          <h5>${}</h5>
+          <span>${}</span>
           <div class="colors">
             <span class="product-color" style="background: #f15025"></span><span class="product-color" style="background: #222"></span>
           </div>
-          <p>
-           Cloud bread VHS hell of banjo bicycle rights jianbing umami mumblecore etsy 8-bit pok pok +1 wolf. Vexillologist yr dreamcatcher waistcoat, authentic chillwave trust fund. Viral typewriter fingerstache pinterest pork belly narwhal. Schlitz venmo everyday carry kitsch pitchfork chillwave iPhone taiyaki trust fund hashtag kinfolk microdosing gochujang live-edge
-          </p>
+          <p>${}</p>
           <button class="btn">add to cart</button>
         </div>
-</div>
-*/
-const displayProduct = (product) => {};
+</div>`
+};
 const start = async () => {
   const data = await fetchProduct();
   displayProduct(data);
