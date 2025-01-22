@@ -11,7 +11,7 @@ const fetchProduct = async () => {
     const data = await res.json();
     return data;
   } catch (error) {
-    productsDOM.innerHTML = '<p class="error">Se ha producido un error</p>';
+    productDOM.innerHTML = '<p class="error">Se ha producido un error</p>';
   }
 };
 
@@ -41,7 +41,7 @@ const displayProduct = (product) => {
           <h5>${company}</h5>
           <span>${price / 100}</span>
           <div class="colors">
-            ${colorList}
+            ${colorsList}
           </div>
           <p>${description}</p>
           <button class="btn">add to cart</button>
