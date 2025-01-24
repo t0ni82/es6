@@ -1,0 +1,26 @@
+[
+        {
+            "titulo": "El Quijote",
+            "autor": "Miguel de Cervantes",
+            "leido": true,
+            "imagen": "./images/libro1.jpg"
+        },
+        {
+            "titulo": "Cien años de soledad",
+            "autor": "Gabriel García Márquez",
+            "leido": false,
+            "imagen": "./images/libro2.jpg"
+        },
+        {
+            "titulo": "La sombra del viento",
+            "autor": "Carlos Ruiz Zafón",
+            "leido": true,
+            "imagen": "./images/libro3.png"
+        },
+        {
+            "titulo": "1984",
+            "autor": "George Orwell",
+            "leido": false,
+            "imagen": "./images/libro4.jpg"
+        }
+    ]

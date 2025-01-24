@@ -1,0 +1,10 @@
+.color-list-item {
+  color: red;
+}
+.leido {
+  color: green;
+}
+
+.no-leido {
+  color: gray;
+}
