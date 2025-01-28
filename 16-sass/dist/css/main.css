@@ -1,0 +1,66 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: #f4f4f4;
+}
+
+header {
+  padding: 3rem;
+  background-color: #333;
+  color: #000;
+}
+header h1 {
+  font-size: 3.2rem;
+  text-align: center;
+}
+
+.section {
+  padding: 1rem;
+}
+.section h3 {
+  font-size: 2rem;
+}
+.section-a {
+  background-color: #f4f4f4;
+  color: #f4f4f4;
+}
+.section-a-darked {
+  background-color: #333;
+}
+.section-a-b {
+  background: red;
+  color: aquamarine;
+}
+
+a {
+  color: blue;
+}
+a:hover {
+  color: red;
+}
+
+.btn-dark, .btn-ligth {
+  display: inline-block;
+  padding: 0.7rem 2rem;
+  border: 1px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  margin-top: 1rem;
+}
+
+.btn-ligth {
+  background-color: #f4f4f4;
+  color: #333;
+}
+.btn-dark {
+  background-color: #333;
+  color: #f4f4f4;
+}
+
+/*# sourceMappingURL=main.css.map */
