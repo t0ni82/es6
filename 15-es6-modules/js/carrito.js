@@ -16,5 +16,11 @@ export const agregarAlCarrito = (id, cantidad) => {
   });
   console.log(`${cantidad} x ${producto.nombre} añadido al carrito`);
 };
+//Devuelve el arry del carrito
+export const getCarrito = () => carrito;
 
-//TODO los productos del carrito
+//Obtener los productos del carrito
+export const mostrarCarrito = () => {
+  console.log("Carrito:");
+  console.table(carrito);
+};
